@@ -3,6 +3,26 @@ __pycache__/
 *.py[codz]
 *$py.class
 
+
+# Environment
+venv/
+.env
+
+# Data
+data/raw/
+data/interim/
+data/processed/
+
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# MLflow
+mlruns/
+mlruns.db
+
+
 # C extensions
 *.so
 
