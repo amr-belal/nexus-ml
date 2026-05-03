@@ -32,7 +32,7 @@ class MissingValueHandler(BaseEstimator , TransformerMixin):
         X = X.copy()
         X[NONE_CATEGORICAL] = X[NONE_CATEGORICAL].fillna("None")
         X[ZERO_NUMERICAL] = X[ZERO_NUMERICAL].fillna(0)
-        X['Electrical'] = X['Electrical'].fillna(self.electrical_mode_)
+        X['Electrical'] = X['Electrical'].fillna(self.electrical_mode)
         logger.info(f"Missing values after cleaning: {X.isnull().sum().sum()}")
         return X
 
