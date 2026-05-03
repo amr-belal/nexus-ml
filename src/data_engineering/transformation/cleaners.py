@@ -1,5 +1,8 @@
-import pandas as pd 
+import pandas as pd
+import numpy as np
+from sklearn.base import BaseEstimator, TransformerMixin
 from src.common.logger import get_logger
+
 
 logger = get_logger(__name__)
 
@@ -19,12 +22,17 @@ ZERO_NUMERICAL = [
     'Garage Cars', 'Garage Area'
 ]
 
-def handle_missing_values(df :pd.DataFrame) -> pd.DataFrame:
-    df = df.copy()
-    df[NONE_CATEGORICAL] = df[NONE_CATEGORICAL].fillna("None")
-    df[ZERO_NUMERICAL] = df[ZERO_NUMERICAL].fillna(0)
-    df['Electrical'] = df['Electrical'].fillna(df['Electrical'].mode()[0])
-    logger.info(f"Missing values after cleaning: {df.isnull().sum().sum()}")
-    return df
 
+class MissingValueHandler(BaseEstimator , TransformerMixin):
+    def fit(self , X , y=None):
+        self.electrical_mode = X['Electrical'].mode()[0]
+        return self
+    
+    def transform(self , X):
+        X = X.copy()
+        X[NONE_CATEGORICAL] = X[NONE_CATEGORICAL].fillna("None")
+        X[ZERO_NUMERICAL] = X[ZERO_NUMERICAL].fillna(0)
+        X['Electrical'] = X['Electrical'].fillna(self.electrical_mode_)
+        logger.info(f"Missing values after cleaning: {X.isnull().sum().sum()}")
+        return X
 
