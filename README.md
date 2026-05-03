@@ -3,3 +3,11 @@ End-to-end ML platform featuring price prediction, fraud detection,  and market 
 
 
 source venv/bin/activate
+
+
+> mlflow
+
+```bash
+mlflow ui --backend-store-uri sqlite:///mlruns.db
+```
+
