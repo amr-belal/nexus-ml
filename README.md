@@ -11,3 +11,5 @@ source venv/bin/activate
 mlflow ui --backend-store-uri sqlite:///mlruns.db
 ```
 
+
+uvicorn src.api.main:app --reload
